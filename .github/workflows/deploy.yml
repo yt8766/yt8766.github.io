@@ -1,6 +1,6 @@
 # 构建 VitePress 站点并将其部署到 GitHub Pages 的示例工作流程
 #
-name: Deploy VitePress site to Pages
+name: Deploy VitePress
 
 on:
   # 在针对 `main` 分支的推送上运行。如果你
@@ -42,17 +42,39 @@ jobs:
         with:
           node-version: 22
           cache: pnpm # 或 pnpm / yarn
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
+
       - name: Install dependencies
         run: pnpm install # 或 pnpm install / yarn install / bun install
+
       - name: Build with VitePress
         run: pnpm docs:build # 或 pnpm docs:build / yarn docs:build / bun run docs:build
+
+      - name: Send email
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: smtp.gmail.com
+          server_port: 465
+          username: ${{ secrets.SMTP_USER }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: "构建状态: ${{ github.event.workflow_run.conclusion }}"
+          body: |
+            仓库: ${{ github.repository }}
+            构建工作流: ${{ github.event.workflow_run.name }}
+            状态: ${{ github.event.workflow_run.conclusion }}
+            日志链接: ${{ github.event.workflow_run.html_url }}
+          to: aa1322147900@qq.com # 收件邮箱
+          from: GitHub Actions <actions@github.com>
+          content_type: text/plain
+
       - name: Move built files to root directory and clean up
         run: |
           rm -rf guide reference
           mv docs/.vitepress/dist/* ./
           rm -rf docs/.vitepress/dist
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
