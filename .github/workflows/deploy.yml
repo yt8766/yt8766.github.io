@@ -66,7 +66,7 @@ jobs:
             状态: ${{ github.event.workflow_run.conclusion }}
             日志链接: ${{ github.event.workflow_run.html_url }}
           to: a17674328693@gmail.com # 收件邮箱
-          from: GitHub Actions <actions@github.com>
+          from: ${{secrets.SMTP_USER}}
           content_type: text/plain
 
       - name: Move built files to root directory and clean up
