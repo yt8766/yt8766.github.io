@@ -57,8 +57,8 @@ jobs:
         with:
           server_address: smtp.qq.com
           server_port: 465
-          username: yangjunmi@foxmail.com
-          password: onbwyjjguljdjied
+          username: ${{secret.MAIL_USERNAME }}
+          password: ${{secret.MAIL_PASSWORD }}
           subject: "VitePress部署状态: ${{ job.status }}"
           body: |
             🚀 项目部署通知
@@ -66,12 +66,11 @@ jobs:
             仓库: ${{ github.repository }}
             分支：${{ github.ref_name }}
             触发者：${{ github.actor }}
-            时间: ${{ steps.get-time.outputs.timestamp }}
             提交ID: ${{ github.sha }}
             构建状态: ${{ job.status  }}
             日志: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
           to: a17674328693@gmail.com,1322147900@qq.com # 收件邮箱
-          from: yangjunmi@foxmail.com
+          from: ${{secret.MAIL_USERNAME }}
           secure: true
 
       - name: Move built files to root directory and clean up
