@@ -67,6 +67,7 @@ jobs:
             日志链接: ${{ github.event.workflow_run.html_url }}
           to: yangjunmi@foxmail.com # 收件邮箱
           from: yt8766M@gmail.com
+          secure: true # 启用 SSL 加密 secure: true  # 启用 SSL 加密
           content_type: text/plain
 
       - name: Move built files to root directory and clean up
