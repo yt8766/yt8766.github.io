@@ -57,24 +57,16 @@ jobs:
         with:
           server_address: smtp.qq.com
           server_port: 465
-          username: ${{ secrets.MAIL_USERNAME  }}
+          username: yangjunmi@foxmail.com
           password: ${{ secrets.MAIL_PASSWORD  }}
-
           subject: "构建状态: ${{ github.event.workflow_run.conclusion }}"
           body: |
-            🚀 项目部署通知
-             ==================
-             项目: ${{ github.repository }}
-             分支: ${{ github.ref_name }}
-             状态: ${{ job.status }}
-             触发者: ${{ github.actor }}
-             提交ID: ${{ github.sha }}
-             时间: ${{ steps.get-time.outputs.timestamp }}
-             日志: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            仓库: ${{ github.repository }}
+            构建工作流: ${{ github.event.workflow_run.name }}
+            状态: ${{ github.event.workflow_run.conclusion }}
+            日志链接: ${{ github.event.workflow_run.html_url }}
           to: a17674328693@gmail.com # 收件邮箱
-          from: ${{  secrets.MAIL_USERNAME  }}
-          timeout: 60000 # 增加超时时间
-          debug: true # 启用详细日志
+          from: yangjunmi@foxmail.com
           secure: true
 
       - name: Move built files to root directory and clean up
