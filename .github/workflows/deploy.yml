@@ -73,10 +73,9 @@ jobs:
       - name: Send email
         uses: dawidd6/action-send-mail@v2
         with:
-          server_address: smtp.163.com # 发送端的服务器地址
+          server_address: smtp.qq.com # 发送端的服务器地址
           server_port: 465 # 发送端服务器的端口号
           # 账号 授权码
-          secure: true # 启用 SSL 加密
           username: ${{secrets.SMTP_USER}} # 发送的邮箱号(发送端)
           password: ${{secrets.SMTP_PASSWORD}} # 发送的邮箱授权码(发送端)
           subject: "构建状态: ${{ github.event.workflow_run.conclusion }}" # 邮件内容标题
