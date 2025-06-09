@@ -53,7 +53,7 @@ jobs:
         run: pnpm docs:build # 或 pnpm docs:build / yarn docs:build / bun run docs:build
 
       - name: Send email
-        uses: dawidd6/action-send-mail@v5
+        uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.qq.com
           server_port: 465
@@ -65,8 +65,8 @@ jobs:
             构建工作流: ${{ github.event.workflow_run.name }}
             状态: ${{ github.event.workflow_run.conclusion }}
             日志链接: ${{ github.event.workflow_run.html_url }}
-          to: a17674328693@gmail.com # 收件邮箱
-          from: ${{secrets.SMTP_USER}}
+          to: yangjunmi@foxmail.com # 收件邮箱
+          from: yt8766
           content_type: text/plain
 
       - name: Move built files to root directory and clean up
