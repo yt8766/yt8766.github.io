@@ -56,10 +56,10 @@ jobs:
         uses: dawidd6/action-send-mail@v5
         with:
           server_address: smtp.qq.com
-          server_port: 587
+          server_port: 465
           username: ${{ secrets.MAIL_USERNAME  }}
           password: ${{ secrets.MAIL_PASSWORD  }}
-          from: <${{  secrets.MAIL_USERNAME  }}>
+          from: ${{  secrets.MAIL_USERNAME  }}
           subject: "构建状态: ${{ github.event.workflow_run.conclusion }}"
           body: |
             仓库: ${{ github.repository }}
