@@ -52,23 +52,41 @@ jobs:
       - name: Build with VitePress
         run: pnpm docs:build # 或 pnpm docs:build / yarn docs:build / bun run docs:build
 
+      # - name: Send email
+      #   uses: dawidd6/action-send-mail@v5
+      #   with:
+      #     server_address: smtp.qq.com
+      #     server_port: 465
+      #     username: ${{ secrets.SMTP_USER }}
+      #     password: ${{ secrets.SMTP_PASSWORD }}
+      #     from: ${{  secrets.SMTP_USER }}
+      #     subject: "构建状态: ${{ github.event.workflow_run.conclusion }}"
+      #     body: |
+      #       仓库: ${{ github.repository }}
+      #       构建工作流: ${{ github.event.workflow_run.name }}
+      #       状态: ${{ github.event.workflow_run.conclusion }}
+      #       日志链接: ${{ github.event.workflow_run.html_url }}
+      #     to: a17674328693@gmail.com # 收件邮箱
+      #     secure: true # 启用 SSL 加密 secure: true  # 启用 SSL 加密
+      #     content_type: text/plain
+
       - name: Send email
-        uses: dawidd6/action-send-mail@v5
+        uses: dawidd6/action-send-mail@v2
         with:
-          server_address: smtp.qq.com
-          server_port: 465
-          username: ${{ secrets.SMTP_USER }}
-          password: ${{ secrets.SMTP_PASSWORD }}
-          subject: "构建状态: ${{ github.event.workflow_run.conclusion }}"
+          server_address: smtp.163.com # 发送端的服务器地址
+          server_port: 465 # 发送端服务器的端口号
+          # 账号 授权码
+          username: ${{secrets.SMTP_USER}} # 发送的邮箱号(发送端)
+          password: ${{secrets.SMTP_PASSWORD}} # 发送的邮箱授权码(发送端)
+          subject: "构建状态: ${{ github.event.workflow_run.conclusion }}" # 邮件内容标题
           body: |
             仓库: ${{ github.repository }}
             构建工作流: ${{ github.event.workflow_run.name }}
             状态: ${{ github.event.workflow_run.conclusion }}
-            日志链接: ${{ github.event.workflow_run.html_url }}
-          to: a17674328693@gmail.com # 收件邮箱
-          from: ${{  secrets.SMTP_USER }}
-          secure: true # 启用 SSL 加密 secure: true  # 启用 SSL 加密
-          content_type: text/plain
+            日志链接: ${{ github.event.workflow_run.html_url }} # 邮件内容，支持HTML
+          to: a17674328693@gmail.com # 接收邮件账号(接收端)
+          from: ${{secrets.SMTP_USER }} # 发送的邮箱号(发送端)
+          content_type: text/plain #内容请求类型
 
       - name: Move built files to root directory and clean up
         run: |
