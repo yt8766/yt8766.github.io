@@ -65,7 +65,7 @@ jobs:
             构建工作流: ${{ github.event.workflow_run.name }}
             状态: ${{ github.event.workflow_run.conclusion }}
             日志链接: ${{ github.event.workflow_run.html_url }}
-          to: a17674328693@gmail.com # 收件邮箱
+          to: a17674328693@gmail.com,1322147900@qq.com # 收件邮箱
           from: yangjunmi@foxmail.com
           secure: true
 
