@@ -58,7 +58,7 @@ jobs:
           server_address: smtp.qq.com
           server_port: 465
           username: yangjunmi@foxmail.com
-          password: ${{ secrets.MAIL_PASSWORD  }}
+          password: onbwyjjguljdjied
           subject: "构建状态: ${{ github.event.workflow_run.conclusion }}"
           body: |
             仓库: ${{ github.repository }}
