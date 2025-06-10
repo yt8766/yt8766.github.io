@@ -69,7 +69,7 @@ jobs:
             提交ID: ${{ github.sha }}
             构建状态: ${{ job.status  }}
             日志: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
-          to: a17674328693@gmail.com,1322147900@qq.com # 收件邮箱
+          to: ${{secrets.MAIL_TO}} # 收件邮箱
           from: ${{secrets.MAIL_USERNAME }}
           secure: true
 
